@@ -1,0 +1,32 @@
+# --- Python 通用 ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- 虚拟环境 (非常重要，不要提交几千个依赖包！) ---
+venv/
+.venv/
+env/
+.env/
+
+# --- 环境变量/敏感信息 (绝对不要提交！) ---
+.env
+.env.local
+config.py  # 如果里面有 API Key
+
+# --- IDE 配置 (VS Code) ---
+.vscode/
+# 注意：有时候团队协作需要保留 .vscode/launch.json，看情况决定是否注释掉下面这行
+.vscode/settings.json
+
+# --- 操作系统生成的文件 ---
+.DS_Store
+Thumbs.db
+
+# --- 项目临时文件 ---
+# 如果 AgentCube 会在本地生成临时下载目录，也忽略掉
+tmp/
+temp/
+logs/
+*.log
