@@ -7,7 +7,7 @@ This project provides a standard API wrapper for `agentcube` (or a mock sandbox 
 *   **Dify Compatible**: Comes with a ready-to-use OpenAPI schema (`external-codeinterpreter.json`).
 *   **Sandbox Management**: Create (`/create_sandbox`) and destroy (`/stop_sandbox`) isolated environments.
 *   **Execution**: Run Python code (`/run_code`) and Shell commands (`/execute_command`).
-*   **File Transfer**: Support for uploading files from URLs (`/upload_file`) and downloading generated files (`/download_file`).
+*   **File Management**: Upload files from URLs (`/upload_file`), write content directly to files (`/write_file`), and download generated files (`/download_file`).
 
 ## Prerequisites
 

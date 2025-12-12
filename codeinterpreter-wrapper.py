@@ -23,6 +23,7 @@ except ImportError:
         def execute_command(self, cmd): return f"Mock Exec: {cmd}"
         def run_code(self, language, code): return f"Mock Run {language}: {code}"
         def upload_file(self, local, remote): pass
+        def write_file(self, content, remote): pass
         def download_file(self, remote, local): 
             with open(local, 'w') as f: f.write("mock data")
         def stop(self): return True
@@ -54,6 +55,11 @@ class RunCodeRequest(BaseModel):
     sandbox_id: str
     code: str
     language: str = "py"
+
+class WriteFileRequest(BaseModel):
+    sandbox_id: str
+    content: str
+    remote_path: str
 
 class UploadRequest(BaseModel):
     sandbox_id: str
@@ -132,6 +138,18 @@ async def run_code(req: RunCodeRequest):
     try:
         output = client.run_code(language=req.language, code=req.code)
         return {"output": str(output)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/write_file", summary="Write File to Sandbox", operation_id="write_file")
+async def write_file(req: WriteFileRequest):
+    """
+    Corresponds to: code_interpreter.write_file(content, remote_path)
+    """
+    client = get_client_or_404(req.sandbox_id)
+    try:
+        client.write_file(req.content, req.remote_path)
+        return {"status": "success", "remote_path": req.remote_path}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

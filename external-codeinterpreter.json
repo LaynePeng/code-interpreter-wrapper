@@ -57,6 +57,16 @@
         "responses": { "200": { "description": "OK" } }
       }
     },
+    "/write_file": {
+      "post": {
+        "operationId": "write_file",
+        "summary": "Write file content directly",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "object", "properties": { "sandbox_id": { "type": "string" }, "content": { "type": "string" }, "remote_path": { "type": "string" } }, "required": ["sandbox_id", "content", "remote_path"] } } }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
     "/upload_file": {
       "post": {
         "operationId": "upload_file",
