@@ -123,6 +123,51 @@ Cleans up the environment.
     }
     ```
 
+## Deployment with Docker and Kubernetes
+
+A `Makefile`, `Dockerfile`, and Kubernetes deployment files (`k8s/deployment.yaml`) are provided to help you containerize and deploy the service.
+
+### Configuration
+
+You can set the following variables in your shell or directly in the `Makefile`:
+
+*   `REGISTRY`: Your Docker image registry (e.g., `docker.io/yourusername`). Default: `layne-docker-registry`
+*   `IMAGE_NAME`: Name of the Docker image. Default: `codeinterpreter-wrapper`
+*   `TAG`: Image tag. Default: `latest`
+*   `NAMESPACE`: Kubernetes namespace for deployment. Default: `default`
+
+### Usage
+
+*   **Build Docker Image**: Builds the Docker image.
+    ```bash
+    make build REGISTRY=your-docker-username
+    ```
+
+*   **Push Docker Image**: Pushes the image to the specified registry.
+    ```bash
+    make push REGISTRY=your-docker-username
+    ```
+
+*   **Deploy to Kubernetes**: Applies the Kubernetes deployment and service configuration. It automatically replaces the image placeholder in `k8s/deployment.yaml` with the full image name.
+    ```bash
+    make deploy REGISTRY=your-docker-username NAMESPACE=your-namespace
+    ```
+
+*   **All-in-one (Build, Push, Deploy)**:
+    ```bash
+    make all REGISTRY=your-docker-username
+    ```
+
+*   **Undeploy from Kubernetes**: Deletes the deployment and service from Kubernetes.
+    ```bash
+    make undeploy NAMESPACE=your-namespace
+    ```
+
+*   **View Logs**: Streams logs from the deployed application.
+    ```bash
+    make logs NAMESPACE=your-namespace
+    ```
+
 ## Development
 
 *   **Mock Mode**: If `agentcube` is not installed, the service automatically falls back to a Mock implementation (prints to console, simulates execution).

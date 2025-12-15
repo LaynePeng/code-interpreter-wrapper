@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codeinterpreter-wrapper
+  labels:
+    app: codeinterpreter-wrapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codeinterpreter-wrapper
+  template:
+    metadata:
+      labels:
+        app: codeinterpreter-wrapper
+    spec:
+      containers:
+      - name: codeinterpreter-wrapper
+        image: IMAGE_PLACEHOLDER
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        # Add other environment variables here if needed
+        # - name: HOST_URL
+        #   value: "http://your-service-url"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: codeinterpreter-wrapper
+spec:
+  selector:
+    app: codeinterpreter-wrapper
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
