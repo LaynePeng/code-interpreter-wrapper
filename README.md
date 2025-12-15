@@ -80,3 +80,29 @@ You can view the interactive API documentation locally at:
 ## Development
 
 *   **Mock Mode**: If `agentcube` is not installed, the service automatically falls back to a Mock implementation (prints to console, simulates execution), making it easy to test the Dify integration flow without a real sandbox backend.
+
+## Docker & Kubernetes Deployment
+
+You can use the provided `Makefile` to build the Docker image and deploy it to a Kubernetes cluster.
+
+### 1. Build Docker Image
+
+```bash
+make build
+```
+This builds the image tagged as `codeinterpreter-wrapper:latest`.
+
+### 2. Deploy to Kubernetes
+
+Ensure your `kubectl` is configured to point to your desired cluster.
+
+```bash
+make deploy
+```
+This applies the `k8s-deployment.yaml` configuration to your cluster.
+
+### Other Commands
+
+*   `make push`: Pushes the image to a registry (requires configuring `IMAGE_NAME` in Makefile).
+*   `make undeploy`: Removes the deployment from the cluster.
+*   `make clean`: Removes the local docker image.
